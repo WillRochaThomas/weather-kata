@@ -1,10 +1,11 @@
 # Coding Kata
-
-This Kata will be divided into 3 x 20 minute timeboxes. At the end of each timebox, you will be given further instructions. 
+ 
+ This is an adapted version of Dave Thomas' 'Munging Data' coding kata, as published on http://codekata.com/kata/kata04-data-munging/.
+ Credit goes to Dave for the inspiration.
 
 ## The Challenge
 
-You have exported some forecast data collected from a site in Exeter out of a legacy system, and been asked to write a program that analyses the data.
+You have exported some forecast data collected from a weather station in Manchester out of a legacy system, and been asked to write a program that analyses the data.
  
 In [data/forecast.dat](data/forecast.dat), you will find the data exported.
   
@@ -14,11 +15,11 @@ The program should do the following (in priority order):
 
 2. output all day numbers where the average temperature (column 3) was greater than 25 degrees celsius (temperature data is in fahrenheit)
 
-3. output all day numbers and the corresponding average temperature for all days where we know the probability of precipitation (PoP) for the whole of Exeter will be greater than 30%
+3. output all day numbers and the corresponding average temperature for all days where we know the probability of precipitation (PoP) for the whole of Manchester will be greater than 30%
 
-Using the forecast data we have, we can calculate the minimum known PoP for the whole of Exeter using a couple steps:
+Using the forecast data we have, we can calculate the minimum known PoP for the whole of Manchester using a couple steps:
    * first multiply the percent of the forecast area that will receive measurable precipitation (AoP) by the confidence that precipitation will occur somewhere in the forecast area (CoP) 
-   * then multiply the result of the above by 80%, which accounts for the fact the area covered by the forecast data makes up 80% of the area of Exeter
+   * then multiply the result of the above by 80%, which accounts for the fact the area covered by the forecast data makes up 80% of the area of Manchester
 
 
 ## Some Rules
