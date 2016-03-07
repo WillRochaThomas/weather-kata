@@ -1,0 +1,57 @@
+import static org.gradle.api.JavaVersion.VERSION_1_8
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+plugins {
+    id 'application'
+    id 'project-report'
+    id 'jacoco'
+    id 'findbugs'
+}
+
+group 'uk.gov.metoffice'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = VERSION_1_8
+targetCompatibility = VERSION_1_8
+
+mainClassName = 'uk.gov.metoffice.kata.ForecastAnalyzer'
+
+repositories {
+    mavenCentral()
+}
+
+//To add dependencies for production code (not test code), add a 'compile' property and a comma-separated list of libraries, in the same format as the testCompile property
+dependencies {
+    testCompile 'junit:junit:4.12',
+            'info.cukes:cucumber-java:1.2.4',
+            'info.cukes:cucumber-junit:1.2.4',
+            'org.mockito:mockito-core:2.0.31-beta',
+            'org.powermock:powermock-mockito-release-full:1.6.2'
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}
+
+task cucumber() {
+    dependsOn assemble, compileJava, compileTestJava
+
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--tags', '~@wip', '--glue', 'uk.gov.metoffice.kata', 'src/test/resources/features']
+        }
+    }
+}
